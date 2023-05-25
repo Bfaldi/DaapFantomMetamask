@@ -1,0 +1,19 @@
+from web3 import Web3
+
+# Configuração do Web3 e Infura
+infura_project_id = 'seu_infura_project_id'
+web3 = Web3(Web3.HTTPProvider(f'https://rpcapi.fantom.network/?apiKey={infura_project_id}'))
+
+# Verifica a conexão com a rede da Fantom
+if web3.is_connected():
+    print('Conexão estabelecida com sucesso.')
+    print(f'Versão do nó da rede: {web3.client_version}')
+    print(f'Último bloco: {web3.eth.block_number}')
+else:
+    print('Não foi possível estabelecer a conexão com a rede da Fantom.')
+
+# Exemplo de uso: obter o saldo de uma conta
+account_address = '0x97a8CE01a1906B69c6E6CfCbb55EBcC1266c078E'
+balance = web3.eth.get_balance(account_address)
+balance_ether = web3.from_wei(balance, 'ether')
+print(f'Saldo da conta {account_address}: {balance_ether} FTM')
